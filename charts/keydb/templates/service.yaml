@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keydb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: keydb
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+spec:
+  ports:
+    - name: tcp-keydb
+      port: 6379
+      targetPort: 6379
+      protocol: TCP
+  selector:
+    app: keydb

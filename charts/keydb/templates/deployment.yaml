@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keydb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: keydb
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keydb
+  template:
+    metadata:
+      labels:
+        app: keydb
+      annotations:
+        {{- toYaml $.Values.annotations | nindent 8 }}
+    spec:
+      containers:
+        - name: keydb
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["keydb-server"]
+          args:
+            - "--dir"
+            - "/data"
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
+          readinessProbe:
+            exec:
+              command: ["keydb-cli", "--raw", "incr", "ping"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+          livenessProbe:
+            exec:
+              command: ["keydb-cli", "--raw", "incr", "ping"]
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: config
+              mountPath: /etc/keydb/keydb.conf
+              subPath: keydb.conf
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          configMap:
+              name: keydb-config
+        - name: data
+          hostPath:
+            path: /opt/teknoir/keydb
+            type: DirectoryOrCreate
