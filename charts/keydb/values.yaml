@@ -1,7 +1,7 @@
 # KeyDB container configuration
 image:
   repository: eqalpha/keydb
-  tag: "6.3.0"
+  tag: "x86_64_v6.3.4"
   pullPolicy: Always
 
 # Resource requests and limits
