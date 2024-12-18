@@ -9,10 +9,14 @@ metadata:
   annotations:
     {{- toYaml $.Values.annotations | nindent 4 }}
 spec:
+  type: {{ if .Values.nodePort.enabled }}NodePort{{ else }}ClusterIP{{ end }}
   ports:
     - name: tcp-keydb
       port: 6379
       targetPort: 6379
       protocol: TCP
+      {{- if .Values.nodePort.enabled }}
+      nodePort: 31379
+      {{- end }}
   selector:
     app: keydb

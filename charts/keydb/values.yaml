@@ -14,10 +14,8 @@ resources:
     cpu: 500m
 
 # Service configuration
-service:
-  type: ClusterIP
-  port: 6379
-
+nodePort:
+  enabled: false
 
 annotations:
   teknoir.org/managed-by: devstudio
