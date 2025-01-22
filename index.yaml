@@ -3,6 +3,16 @@ entries:
   keydb:
   - apiVersion: v2
     appVersion: x86_64_v6.3.4
+    created: "2025-01-22T14:16:19.262999783Z"
+    description: A Helm chart for KeyDB
+    digest: 4673cd1d1cc0f0a589238408d1c1488a7744d8a3ef7a33ac4181dfd6db88b66a
+    name: keydb
+    type: application
+    urls:
+    - https://github.com/teknoir/keydb-helm/releases/download/keydb-0.1.1/keydb-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: x86_64_v6.3.4
     created: "2024-12-18T07:48:37.14109675Z"
     description: A Helm chart for KeyDB
     digest: efacc26a7dfc9de5f0cd90e82cdb3ececb6cb7b29a0c5609177c0203aefefc82
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/teknoir/keydb-helm/releases/download/keydb-0.0.1/keydb-0.0.1.tgz
     version: 0.0.1
-generated: "2024-12-18T07:48:37.14111285Z"
+generated: "2025-01-22T14:16:19.26302473Z"
