@@ -10,8 +10,8 @@ resources:
     memory: 512Mi
     cpu: 100m
   limits:
-    memory: 1Gi
-    cpu: 500m
+    memory: 8Gi
+    cpu: 1500m
 
 # Service configuration
 nodePort:
@@ -704,7 +704,7 @@ keydbConfig: |
   # limit for maxmemory so that there is some free RAM on the system for replica
   # output buffers (but this is not needed if the policy is 'noeviction').
   #
-  # maxmemory <bytes>
+  maxmemory 8000000000
 
   # MAXMEMORY POLICY: how KeyDB will select what to remove when maxmemory
   # is reached. You can select among five behaviors:
@@ -735,7 +735,7 @@ keydbConfig: |
   #
   # The default is:
   #
-  # maxmemory-policy noeviction
+  maxmemory-policy volatile-ttl
 
   # LRU, LFU and minimal TTL algorithms are not precise algorithms but approximated
   # algorithms (in order to save memory), so you can tune it for speed or
