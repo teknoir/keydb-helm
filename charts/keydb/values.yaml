@@ -17,6 +17,8 @@ resources:
 nodePort:
   enabled: false
 
+nodeSelector: {}
+
 annotations:
   teknoir.org/managed-by: devstudio
 
